@@ -171,3 +171,46 @@ map(double,List(1,2,3)) // List(2, 4, 6)
 def strlen(s: String) = s.length
 map(strlen, List("a", "bb", "ccc"))   // List(1, 2, 3)
 
+//a method that  return a function takes a parameter as String and println that string param
+def greet():String  => Unit =
+  (name:String) => println(s"Hello, $name")
+
+val greet_function = greet()
+
+greet_function("Joe")
+
+//improving the method
+
+def greet2(greet_str:String):String => Unit =
+  (inner_str:String) => println(s"$greet_str, $inner_str")
+
+val greeting = greet2("hello")
+
+greeting("Ali")
+
+//a method that returns functions that greet people in different languages
+def createGreetingFunction(desiredLanguage: String): String => Unit =
+  val englishGreeting = (name: String) => println(s"Hello, $name")
+  val frenchGreeting = (name: String) => println(s"Bonjour, $name")
+  val spanishGreeting = (name: String) => println(s"Hola, $name")
+  val germanyGreeting = (name: String) => println(s"Hallo, $name")
+  val turkyGreeting = (name: String) => println(s"Merhaba, $name")
+  val arabicGreeting = (name: String) => println(s"مرحباً, $name")
+
+  desiredLanguage match
+    case "english" => englishGreeting
+    case "french" => frenchGreeting
+    case "spanish" => spanishGreeting
+    case "germany" => germanyGreeting
+    case "turky" => turkyGreeting
+    case "arabic" => arabicGreeting
+
+val greet_in_franch = createGreetingFunction("french")
+greet_in_franch("Jhon")
+
+val greet_int_arabic= createGreetingFunction("arabic")
+
+greet_int_arabic("Ali")
+
+val greet_int_turky = createGreetingFunction("turky")
+greet_int_turky("Ali")
