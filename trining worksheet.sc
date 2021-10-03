@@ -125,3 +125,49 @@ sayHello(helloAli)
 def bonjourJulien(): Unit = println("Bonjour, Julien")
 
 sayHello(bonjourJulien)
+
+//HOF with params
+
+def executeNTimes(f: () => Unit, n: Int): Unit =
+  for i <- 1 to n do f()
+
+executeNTimes(helloAli,3)
+
+def executeAndPrint(f: (Int, Int) => Int, i: Int, j: Int): Unit =
+  println(f(i, j))
+
+def sum(x: Int, y: Int) = x + y
+def multiply(x: Int, y: Int) = x * y
+
+executeAndPrint(sum, 3, 11)       // prints 14
+executeAndPrint(multiply, 3, 9)   // prints 27
+
+//Write your own map method
+
+//first step
+"def map(f:(Int) => A)"
+
+//second step
+"def map[A](f:(Int) => A)"
+
+//third step
+
+"def map[A](f:(Int) => A,xs:List[A])"
+
+//fourth step
+
+"def map[A](f:(Int)=> A, xs:List[A]) : List[A]"
+
+//fifth step
+"def map[A](f: (Int) => A, xs: List[Int]): List[A] ="
+  "for x <- xs yield f(x)"
+
+//Make it generic
+def map[A,B](f:(B)=>A,xs:List[B]): List[A] =
+  for x <- xs yield f(x)
+
+map(double,List(1,2,3)) // List(2, 4, 6)
+
+def strlen(s: String) = s.length
+map(strlen, List("a", "bb", "ccc"))   // List(1, 2, 3)
+
